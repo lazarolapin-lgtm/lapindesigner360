@@ -1,0 +1,191 @@
+ <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LAPINDESIGNER</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+
+    body {
+      background: rgba(217, 198, 163, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #fff;
+    }
+
+    .logo {
+      display: block;
+      margin: 20px auto;
+      width: 1500px;
+      height: 600px;
+      object-fit: cover;
+    }
+
+    .menu {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #13678A;
+      width: 50px;
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 10px;
+      border-radius: 10px;
+    }
+    .menu a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 12px;
+      margin: 10px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .menu a img {
+      width: 20px;
+      height: 20px;
+      margin-bottom: 5px;
+    }
+
+    .text-carousel {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      margin-top: 300px;
+    }
+    .text-carousel span {
+      display: inline-block;
+      padding-right: 50px;
+      font-size: 24px;
+      animation: moveText 15s linear infinite;
+    }
+    @keyframes moveText {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* Galeria vertical para gifs */
+    .gallery-vertical {
+      display: flex;
+      overflow-x: auto;
+      padding: 10px;
+      margin: 20px 0;
+      gap: 10px;
+    }
+    .gallery-vertical div {
+      position: relative;
+      flex: 0 0 auto;
+    }
+    .gallery-vertical img {
+      width: 300px;
+      height: 300px;
+      object-fit: contain;
+    }
+
+    /* Preço com lord-icon */
+    .price-tag {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      color: #148038;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    /* Carrinho menor */
+    .cart {
+      position: fixed;
+      left: 20px;
+      top: 20px;
+    }
+    .cart img {
+      width: 25px;
+      height: 25px;
+    }
+
+    /* Chat branco */
+    .chat {
+      position: fixed;
+      left: 20px;
+      bottom: 20px;
+      background-color: #13678A;
+      padding: 10px 20px;
+      border-radius: 20px;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    footer {
+      background-color: #13678A;
+      text-align: center;
+      padding: 20px;
+      margin-top: 50px;
+    }
+  </style>
+  <script src="https://cdn.lordicon.com/lordicon.js"></script>
+</head>
+<body>
+
+  <!-- Logotipo -->
+  <img src="https://s5.aconvert.com/convert/p3r68-cdx67/mf1c6-27p2i-001.png" alt="Logotipo" class="logo">
+
+  <!-- Menu vertical -->
+  <div class="menu">
+    <a href="mailto:email@exemplo.com">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/new-post.png" alt="E-mail">E-mail
+    </a>
+    <a href="https://wa.me/5599999999999" target="_blank">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp">Whats
+    </a>
+  </div>
+
+  <!-- Carrossel de texto -->
+  <div class="text-carousel">
+    <span>SUA LOGOTIPO ESTÁ AQUI SUA LOGOTIPO ESTÁ AQUI SUA LOGOTIPO ESTÁ AQUI</span>
+  </div>
+
+  <!-- Galeria vertical com ícone de preço -->
+  <div class="gallery-vertical">
+    <div>
+      <img src="https://i.picasion.com/pic92/54bc31cb01902476f57fbbe42a3913e4.gif" alt="">
+      <div class="price-tag">
+        <lord-icon src="https://cdn.lordicon.com/izzyzruz.json" trigger="hover" style="width:50px;height:50px"></lord-icon>
+        R$60,00
+      </div>
+    </div>
+    <div><img src="https://i.picasion.com/pic92/9a8a8a8da7c8b57a44f0f0c95d040404.gif" alt=""></div>
+    <div><img src="https://i.picasion.com/pic92/16cdc58a0014955f250a7c948d459b9d.gif" alt=""></div>
+    <div><img src="https://i.picasion.com/pic92/6d0c06fc9e312e1b2e4c579530a18959.gif" alt=""></div>
+    <div><img src="https://i.picasion.com/pic92/52632bb4078806972047e73192fdea21.gif" alt=""></div>
+  </div>
+
+  <!-- Carrinho -->
+  <div class="cart">
+    <a href="https://www.exemplo.com/carrinho" target="_blank">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/shopping-cart.png" alt="Carrinho">
+    </a>
+  </div>
+
+  <!-- Balão de chat -->
+  <div class="chat">Chat</div>
+
+  <footer>
+    Todos os direitos reservados &copy; 2025
+  </footer>
+
+</body>
+</html>"""
+
+# Caminho para salvar o arquivo
+output_path = Path("/mnt/data/index_corrigido.html")
+
+# Salvar conteúdo no novo arquivo
+output_path.write_text(html_content, encoding="utf-8")
+
+output_path
