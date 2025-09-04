@@ -1,1 +1,0 @@
-crie 3 retângulos html  verticais animados no tamanho 400x700 para imagens 
