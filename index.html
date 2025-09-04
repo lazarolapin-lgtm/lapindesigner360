@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site Personalizado</title>
+  <style>
+    /* Reset básico */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+    body {
+      background: #020202;
+      color: #fff;
+    }
+
+    /* Logotipo */
+    .logo {
+      display: block;
+      margin: 20px auto;
+      width: 1500px;
+      height: 600px;
+      object-fit: cover;
+    }
+
+    /* Menu vertical à direita */
+    .menu {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #13678A;
+      width: 50px;
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 10px;
+      border-radius: 10px;
+    }
+    .menu a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 12px;
+      margin: 10px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .menu a img {
+      width: 20px;
+      height: 20px;
+      margin-bottom: 5px;
+    }
+
+    /* Carrossel de texto */
+    .text-carousel {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      margin-top: 300px;
+    }
+    .text-carousel span {
+      display: inline-block;
+      padding-right: 50px;
+      font-size: 24px;
+      animation: moveText 15s linear infinite;
+    }
+    @keyframes moveText {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* Galeria horizontal */
+    .gallery-horizontal {
+      display: flex;
+      margin: 20px;
+      gap: 10px;
+    }
+    .gallery-horizontal div {
+      position: relative;
+    }
+    .gallery-horizontal img {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    /* Galeria vertical */
+    .gallery-vertical {
+      display: flex;
+      overflow-x: auto;
+      padding: 10px;
+      margin: 20px 0;
+      gap: 10px;
+    }
+    .gallery-vertical div {
+      position: relative;
+      flex: 0 0 auto;
+    }
+    .gallery-vertical img {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+    }
+    .price-circle {
+      width: 15px;
+      height: 15px;
+      background: #13678A;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 5px;
+      left: 5px;
+    }
+
+    /* Retângulos animados */
+    .vertical-rects {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px 0;
+      gap: 10px;
+    }
+    .rect {
+      width: 300px;
+      height: 500px;
+      background-color: #13678A;
+      animation: moveRect 5s ease-in-out infinite alternate;
+    }
+    @keyframes moveRect {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(50px); }
+    }
+
+    /* Carrinho de compras */
+    .cart {
+      position: fixed;
+      left: 20px;
+      top: 20px;
+    }
+    .cart img {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Espaço para anúncio */
+    .ad-space {
+      width: 1000px;
+      height: 500px;
+      margin: 20px auto;
+      background-color: #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Balão de chat */
+    .chat {
+      position: fixed;
+      left: 20px;
+      bottom: 20px;
+      background-color: #13678A;
+      padding: 10px 20px;
+      border-radius: 20px;
+      color: #000;
+      font-weight: bold;
+    }
+
+    /* Rodapé */
+    footer {
+      background-color: #13678A;
+      text-align: center;
+      padding: 20px;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logotipo -->
+  <img src="https://i.picasion.com/pic92/6d3586176d09be1a8f1a8800b0548ce6.gif" alt="Logotipo" class="logo">
+
+  <!-- Menu vertical -->
+  <div class="menu">
+    <a href="mailto:email@exemplo.com">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/new-post.png" alt="E-mail">E-mail
+    </a>
+    <a href="https://wa.me/5599999999999" target="_blank">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp">WhatsApp
+    </a>
+  </div>
+
+  <!-- Carrossel de texto -->
+  <div class="text-carousel">
+    <span>SUA LOGOTIPO ESTÁ AQUI SUA LOGOTIPO ESTÁ AQUI SUA LOGOTIPO ESTÁ AQUI</span>
+  </div>
+
+  <!-- Galeria vertical -->
+  <div class="gallery-vertical">
+    <div><img src="https://i.picasion.com/pic92/54bc31cb01902476f57fbbe42a3913e4.gif" alt=""><div class="price-circle"></div></div>
+    <div><img src="https://i.picasion.com/pic92/9a8a8a8da7c8b57a44f0f0c95d040404.gif" alt=""><div class="price-circle"></div></div>
+    <div><img src="https://i.picasion.com/pic92/16cdc58a0014955f250a7c948d459b9d.gif" alt=""><div class="price-circle"></div></div>
+    <div><img src="https://i.picasion.com/pic92/6d0c06fc9e312e1b2e4c579530a18959.gif" alt=""><div class="price-circle"></div></div>
+    <div><img src="https://i.picasion.com/pic92/52632bb4078806972047e73192fdea21.gif" alt=""><div class="price-circle"></div></div>
+  </div>
+
+  <!-- Galeria horizontal -->
+  <div class="gallery-horizontal">
+    <div><img src="https://i.picasion.com/pic92/8ef967f058e5ab5f000670e1fc49b804.gif" alt=""><div class="price-circle"></div></div>
+    <div><img src="https://i.picasion.com/pic92/7bf89a7f521df17323b74b913433379e.gif" alt=""><div class="price-circle"></div></div>
+    <div><img src="https://i.picasion.com/pic92/4892526b175338b8e436285efd0c584b.gif" alt=""><div class="price-circle"></div></div>
+    <div><img src="https://i.picsum.photos/id/245/300/300.jpg" alt=""><div class="price-circle"></div></div>
+    <div><img src="https://i.picsum.photos/id/246/300/300.jpg" alt=""><div class="price-circle"></div></div>
+    <div><img src="https://i.picsum.photos/id/247/300/300.jpg" alt=""><div class="price-circle"></div></div>
+  </div>
+
+  <!-- Retângulos animados -->
+  <div class="vertical-rects">
+    <div class="rect"></div>
+    <div class="rect"></div>
+    <div class="rect"></div>
+  </div>
+
+  <!-- Carrinho de compras -->
+  <div class="cart">
+    <a href="https://www.exemplo.com/carrinho" target="_blank">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/shopping-cart.png" alt="Carrinho">
+    </a>
+  </div>
+
+  <!-- Espaço para anúncio -->
+  <div class="ad-space">
+    <a href="https://i.picasion.com/pic92/2ba9103c250ce48cc5af488d46f7d3dc.gif" target="_blank">
+      <img src="https://i.picasion.com/pic92/2ba9103c250ce48cc5af488d46f7d3dc.gif" alt="Anúncio Aqui" style="max-width: 100%; height: auto;"/>
+    </a>
+  </div>
+
+  <!-- Balão de chat -->
+  <div class="chat">Chat</div>
+
+  <!-- Rodapé -->
+  <footer>
+    Todos os direitos reservados &copy; 2025
+  </footer>
+
+</body>
+</html>
