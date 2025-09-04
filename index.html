@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -8,7 +8,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
 
     body {
-      background: rgba(rgb(0, 63, 92));rgb
+      background: rgba(0,63,92,1);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       color: #ffffff;
@@ -127,6 +127,59 @@
       padding: 20px;
       margin-top: 50px;
     }
+
+    /* ===== Retângulos Animados ===== */
+    .animated-rectangles {
+      background: #ffffff;
+      padding: 40px 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .animated-rectangles .wrap {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .animated-rectangles .card {
+      width: 350px;
+      height: 600px;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .animated-rectangles .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      animation: kenburns 18s linear infinite;
+    }
+
+    .animated-rectangles .meta {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      color: white;
+      font-weight: bold;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    }
+
+    @keyframes float {
+      0%   { transform: translateY(0); }
+      50%  { transform: translateY(-14px); }
+      100% { transform: translateY(0); }
+    }
+
+    @keyframes kenburns {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
   </style>
   <script src="https://cdn.lordicon.com/lordicon.js"></script>
 </head>
@@ -164,171 +217,24 @@
     <div><img src="https://i.picasion.com/pic92/6d0c06fc9e312e1b2e4c579530a18959.gif" alt=""></div>
     <div><img src="https://i.picasion.com/pic92/52632bb4078806972047e73192fdea21.gif" alt=""></div>
   </div>
- <!doctype html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>3 Retângulos Verticais Animados — 400x700</title>
-<style>
-  :root{
-    --w: 350px;
-    --h: 600px;
-    --radius: 0px;
-    --gap: 24px;
-    --shadow: 0 20px 40px rgba(0,0,0,0.35);
-    --glass-bg: rgba(255,255,255,0.06);
-    --glass-border: rgba(255,255,255,0.12);
-    --float-duration: 6s;
-    --kenburns-duration: 18s;
-  }
 
-  /* layout */
-  body{
-    margin:0;
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background: linear-gradient(180deg,#ffffff 0%, #071029 100%);
-    font-family:system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    padding:32px;
-    box-sizing:border-box;
-  }
-
-  .wrap{
-    display:flex;
-    gap:var(--gap);
-    align-items:center;
-    justify-content:center;
-  }
-
-  /* card (retângulo) */
-  .card{
-    width:var(--w);
-    height:var(--h);
-    border-radius:var(--radius);
-    overflow:hidden;
-    position:relative;
-    box-shadow:var(--shadow);
-    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border:1px solid transparent;
-    transform-origin:center;
-    /* small 3D tilt for depth */
-    perspective:1000px;
-  }
-
-  /* vidro sutil (efeito vidro) */
-  .card::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.0));
-    border-radius:inherit;
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(6px) saturate(120%);
-  }
-
-  /* imagem dentro do cartão */
-  .card img{
-    width:100%;
-    height:100%;
-    object-fit:cover; /* mantém GIF animado e cobre todo o retângulo */
-    display:block;
-    transform-origin:center;
-    /* animação ken-burns (zoom lento) */
-    animation: kenburns var(--kenburns-duration) linear infinite;
-    will-change: transform;
-  }
-
-  /* sobreposição com título/legenda opcional (opcional) */
-  .meta{
-    position:absolute;
-    left:12px;
-    right:12px;
-    bottom:12px;
-    color:white;
-    font-size:16px;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
-    z-index:2;
-    pointer-events:none;
-  }
-
-  /* animação flutuante para cada cartão (pequena translação vertical + rotação) */
-  .card {
-    animation: float var(--float-duration) ease-in-out infinite;
-  }
-
-  /* small delay variations para cards 2 e 3 */
-  .card:nth-child(1){ animation-delay: 0s;          transform: translateZ(0); }
-  .card:nth-child(2){ animation-delay: 0.9s;        transform: translateZ(0); }
-  .card:nth-child(3){ animation-delay: 1.8s;        transform: translateZ(0); }
-
-  /* hover: destaque (aumenta, pausa kenburns) */
-  .card:hover{
-    transform: translateY(-8px) scale(1.02);
-    transition: transform 260ms ease;
-  }
-  .card:hover img{
-    animation-play-state: paused; /* pausa zoom quando passar o mouse */
-  }
-
-  /* Keyframes */
-  @keyframes float{
-    0%   { transform: translateY(0px) rotateX(0deg); }
-    50%  { transform: translateY(-14px) rotateX(1deg); }
-    100% { transform: translateY(0px) rotateX(0deg); }
-  }
-
-  @keyframes kenburns{
-    0%   { transform: scale(1) translateY(0); }
-    50%  { transform: scale(1.08) translateY(-3%); }
-    100% { transform: scale(1) translateY(0); }
-  }
-
-  /* responsividade mínima: permite rolar horizontalmente em telas pequenas */
-  @media (max-width: 1320px){
-    .wrap{ gap:12px; transform: scale(0.9); }
-  }
-  @media (max-width: 1200px){
-    body{ padding:20px; }
-    .wrap{ gap:10px; transform: scale(0.8); }
-  }
-  @media (max-width:900px){
-    /* reduz para caber melhor em celulares */
-    .wrap{ flex-direction:row; transform: scale(0.65); }
-  }
-</style>
-</head>
-<body>
-  <div class="wrap">
-    <!-- Substitua src="..." pelas suas imagens/GIFs -->
-    <div class="card">
-      <img src="https://picsum.photos/400/700?random=1" alt="Imagem 1">
-      <div class="meta">Legenda 1</div>
+  <!-- Retângulos Animados -->
+  <section class="animated-rectangles">
+    <div class="wrap">
+      <div class="card">
+        <img src="https://picsum.photos/400/700?random=1" alt="Imagem 1">
+        <div class="meta">Legenda 1</div>
+      </div>
+      <div class="card">
+        <img src="https://picsum.photos/400/700?random=2" alt="Imagem 2">
+        <div class="meta">Legenda 2</div>
+      </div>
+      <div class="card">
+        <img src="https://picsum.photos/400/700?random=3" alt="Imagem 3">
+        <div class="meta">Legenda 3</div>
+      </div>
     </div>
-
-    <div class="card">
-      <img src="https://picsum.photos/400/700?random=2" alt="Imagem 2">
-      <div class="meta">Legenda 2</div>
-    </div>
-
-    <div class="card">
-      <img src="https://picsum.photos/400/700?random=3" alt="Imagem 3">
-      <div class="meta">Legenda 3</div>
-    </div>
-  </div>
-
-<!-- Se quiser trocar imagens dinamicamente (opcional) -->
-<script>
-  // Exemplo simples: trocar as imagens por URLs suas sem alterar HTML.
-  // const urls = ['url1.gif','url2.jpg','url3.png'];
-  // document.querySelectorAll('.card img').forEach((img,i)=> img.src = urls[i]);
-</script>
-</body>
-</html>
-
+  </section>
 
   <!-- Carrinho -->
   <div class="cart">
@@ -345,7 +251,8 @@
   </footer>
 
 </body>
-</html>"""
+</html>
+
 
 
 
