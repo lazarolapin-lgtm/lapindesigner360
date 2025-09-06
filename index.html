@@ -42,30 +42,30 @@
       background: rgba(255, 255, 255, 0.1);
       border-radius: 8px;
     }
-    /* Logo + Carrinho */
-    .logo-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: rgba(255,255,255,0.6);
-      border-radius: 0;
-      padding: 10px;
-      margin: 20px auto;
-      position: relative;
-      width: fit-content;
-    }
-    .logo img {
-      max-width: 100%;
-      height: auto;
-    }
-    .carrinho {
-      position: absolute;
-      top: 50%;
-      right: 10px;
-      transform: translateY(-50%);
-      font-size: 25px;
-    }
-    .carrinho a { color: white; }
+   .logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* logo à esquerda, carrinho à direita */
+  position: relative;
+  padding: 10px;
+}
+
+.logo img {
+  max-width: 200px; /* ajuste conforme precisar */
+  height: auto;
+}
+
+.carrinho {
+  position: relative;
+  z-index: 10; /* garante que fique por cima */
+}
+
+.carrinho img {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
 
     /* Carrossel texto */
     .carrossel-texto {
@@ -126,15 +126,18 @@
     <a href="https://i.postimg.cc/HnYcXZPN/pedido-termo-logotipo-logo.png" target="_blank">Termos</a>
   </div>
 
-  <!-- Logo + Carrinho -->
-  <div class="logo-container glass">
-    <div class="logo">
-      <img src="https://i.postimg.cc/7Lxvzbvm/EFEITO-FOSCO-1.png" alt="Logotipo da empresa" width="6062" height="3031">
-    </div>
-    <div class="carrinho">
-      <a href="https://img.icons8.com/?size=100&id=59997&format=png&color=000000" target="_blank"><i class="fas fa-shopping-cart"></i></a>
-    </div>
+<!-- Logo + Carrinho -->
+<div class="logo-container glass">
+  <div class="logo">
+    <img src="https://i.postimg.cc/tRdqcYbN/untitled-0.png" alt="Logotipo da empresa">
   </div>
+  <div class="carrinho">
+    <a href="https://img.icons8.com/?size=100&id=59997&format=png&color=000000" target="_blank">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/shopping-cart.png" alt="Carrinho de compras" width="25" height="25">
+    </a>
+  </div>
+</div>
+
 
   <!-- Galeria -->
   <div class="galeria">
@@ -176,6 +179,7 @@
   </footer>
 </body>
 </html>
+
 
 
 
