@@ -45,7 +45,8 @@
     /* Logo + Carrinho */
     .logo-container {
       display: flex;
-      justify-content: center;
+      justify-content:   justify-content: space-between; /* joga o carrinho pro lado direito */
+}
       align-items: center;
       background: rgba(255,255,255,0.6);
       border-radius: 0;
@@ -59,7 +60,8 @@
       height: auto;
     }
     .carrinho {
-      position: absolute;
+        z-index: 10; /* garante que fique por cima da logo */
+}
       top: 50%;
       right: 10px;
       transform: translateY(-50%);
@@ -128,9 +130,11 @@
 
   <!-- Logo + Carrinho -->
   <div class="logo-container glass">
+    
     <div class="logo">
       <img src="https://i.postimg.cc/tRdqcYbN/untitled-0.png" alt="Logotipo da empresa" width="6062" height="3031">
     </div>
+    
     <div class="carrinho">
       <a href="https://img.icons8.com/?size=100&id=59997&format=png&color=000000" target="_blank"><i class="fas fa-shopping-cart"></i></a>
     </div>
@@ -176,6 +180,7 @@
   </footer>
 </body>
 </html>
+
 
 
 
