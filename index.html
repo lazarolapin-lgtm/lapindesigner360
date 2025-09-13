@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LAPINDESIGNER360</title>
+  <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Abel', sans-serif;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* Fundo dinâmico */
+    .background-container {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
+    .background-container img,
+    .background-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    /* Páginas */
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    /* Navbar */
+    .navbar {
+      overflow: hidden;
+      background: rgba(30, 58, 95, 0.6);
+      display: flex;
+      justify-content: flex-end;
+      padding: 10px;
+    }
+    .navbar a {
+      color: white;
+      padding: 15px 21px;
+      text-decoration: none;
+    }
+    .navbar a:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+    }
+
+    /* Logo centralizada */
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      padding: 50px 20px;
+    }
+    .logo img {
+      max-width: 600px;
+      height: auto;
+    }
+
+    /* Carrinho fixo no canto */
+    .carrinho {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .carrinho img {
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+    }
+
+    /* Carrossel texto */
+    .carrossel-texto {
+      white-space: nowrap;
+      overflow: hidden;
+      width: 100%;
+      margin: 20px 0;
+    }
+    .carrossel-texto span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll 20s linear infinite;
+      font-size: 2rem;
+      font-weight: bold;
+      color:#F2F2F0;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    }
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* Galeria + cortina */
+    .galeria-container {
+      position: relative;
+      margin: 20px auto;
+      width: 95%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 15px;
+      justify-items: center;
+      width: 100%;
+    }
+    .galeria img {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+    
+    .galeria img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Botão para acessar mockups */
+    .mockup-access-btn {
+      background: rgba(2, 64, 89, 0.6);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+      margin: 30px 0;
+    }
+
+    .mockup-access-btn:hover {
+      background: rgba(2, 64, 89, 0.8);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+    }
+
+    /* Cortina sobre a galeria */
+    .curtain-wrapper {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 1300px;
+      height: 100%;
+      overflow: hidden;
+      outline: none;
+      cursor: pointer;
+      z-index: 5;
+      background: transparent;
+    }
+    .curtain {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(30, 58, 95, 0.8);
+      transform-origin: right center;
+      transform: scaleX(0);
+      transition: transform 700ms cubic-bezier(.2,.8,.2,1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .curtain-wrapper:hover .curtain {
+      transform: scaleX(1);
+    }
+    .grid-gifs {
+      display: grid;
+      grid-template-columns: repeat(5, 200px);
+      grid-template-rows: repeat(2, 250px);
+      gap: 20px;
+    }
+    .gif-block {
+      width: 200px;
+      height: 250px;
+      background: #12121A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+    .gif-block img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Retângulos */
+    .retangulos { 
+      display: flex; 
+      gap: 70px; 
+      animation: mover 35s linear infinite;
+      margin: 50px 0;
+    }
+    .retangulo { 
+      width: 400px; 
+      height: 600px; 
+      background: rgba(255,255,255,0.05); 
+      overflow: hidden;
+      border-radius: 12px;
+    }
+    .retangulo img { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+    }
+    @keyframes mover { 
+      0% { transform: translateX(-100%); } 
+      100% { transform: translateX(100%); } 
+    }
+
+    /* Chat - Botão flutuante melhorado */
+    .chat-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 1000;
+    }
+    
+    .chat {
+      background: linear-gradient(135deg, #4C4D54, #03A63C);
+      color: white;
+      padding: 15px 25px;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      font-weight: bold;
+      font-size: 16px;
+      border: none;
+    }
+    
+    .chat:hover {
+      background: linear-gradient(135deg, #03A63C, #028A32);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+      color: white;
+      text-decoration: none;
+    }
+    
+    .chat::before {
+      content: "💬";
+      margin-right: 8px;
+    }
+
+    footer { 
+      margin-top: 50px; 
+      padding: 20px; 
+      background: rgba(30, 58, 95, 0.8); 
+      text-align: center; 
+    }
+
+    .contador { 
+      position: absolute; 
+      top: 10px; 
+      right: 20px; 
+      z-index: 10; 
+    }
+
+    /* Estilos da página de mockups */
+    .mockup-page {
+      background: rgba(22, 31, 48, 0.8);
+      padding: 2rem;
+      min-height: 100vh;
+    }
+
+    .mockup-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .mockup-header h2 {
+      color: white;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .back-btn {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      border: 2px solid rgba(255,255,255,0.3);
+      padding: 0.8rem 2rem;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .back-btn:hover {
+      background: rgba(255,255,255,0.2);
+      border-color: rgba(255,255,255,0.5);
+      transform: translateY(-2px);
+    }
+
+    .mockup-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .mockup-card {
+      background: rgba(255,255,255,0.1);
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 12px;
+      padding: 1.5rem;
+      height: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .mockup-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+      transform: rotate(45deg);
+      transition: all 0.6s ease;
+      opacity: 0;
+    }
+
+    .mockup-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255,255,255,0.4);
+      background: rgba(255,255,255,0.15);
+    }
+
+    .mockup-card:hover::before {
+      opacity: 1;
+      transform: translateX(100%) rotate(45deg);
+    }
+
+    .mockup-image {
+      width: 100%;
+      height: 250px;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      background: rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .mockup-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .mockup-card:hover .mockup-image img {
+      transform: scale(1.05);
+    }
+
+    .mockup-info {
+      text-align: center;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .mockup-title {
+      color: white;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+
+    .mockup-description {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .mockup-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(102,126,234,0.8), rgba(118,75,162,0.8));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 12px;
+    }
+
+    .mockup-card:hover .mockup-overlay {
+      opacity: 1;
+    }
+
+    /* Loading placeholder para GIFs */
+    .gif-loading {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 768px) {
+      .galeria-container { 
+        flex-direction: column; 
+        align-items: center; 
+      }
+      .galeria { 
+        width: 100%; 
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+      .galeria img {
+        width: 100%;
+        height: 250px;
+      }
+      .curtain-wrapper { 
+        width: 100%; 
+        height: auto; 
+        position: relative;
+      }
+      .grid-gifs {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      .gif-block {
+        width: 150px;
+        height: 180px;
+      }
+      .mockup-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .mockup-header h2 {
+        font-size: 2rem;
+      }
+      .mockup-card {
+        height: 350px;
+      }
+      .mockup-image {
+        height: 200px;
+      }
+      .retangulo {
+        width: 250px;
+        height: 400px;
+      }
+      .chat {
+        padding: 12px 20px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Fundo -->
+  <div class="background-container">
+    <img src="https://i.postimg.cc/8C879GWX/6356404-Mountain-Landscape-3840x2160.gif" alt="Background GIF">
+  </div>
+
+  <div class="content">
+    <!-- Página Principal -->
+    <div class="page main-page active">
+      <!-- Navbar -->
+      <div class="navbar">
+        <a href="https://wa.me/5511958759477?text=seja%20bem%20vindo%20" target="_blank">Contatos</a>
+        <a href="https://www.google.com" target="_blank">Sobre</a>
+        <a href="https://i.postimg.cc/HnYcXZPN/pedido-termo-logotipo-logo.png" target="_blank">Termos</a>
+      </div>
+
+      <!-- Logo central -->
+      <div class="logo-container glass">
+        <div class="contador">
+          <div id="sfck3353yqa4hw55ht3y5uxpunfq7g36sxn"></div>
+          <script type="text/javascript" src="https://counter5.optistats.ovh/private/counter.js?c=k3353yqa4hw55ht3y5uxpunfq7g36sxn&down=async" async></script>
+        </div>
+        <div class="logo">
+          <img src="https://i.postimg.cc/tRdqcYbN/untitled-0.png" alt="Logotipo da empresa">
+        </div>
+        <div class="carrinho">
+          <a href="https://mail.google.com/chat/u/0/#chat/space/AAQAw8LgJEw" target="_blank">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/shopping-cart.png" alt="Carrinho de compras">
+          </a>
+        </div>
+      </div>
+
+      <!-- Carrossel de Texto -->
+      <div class="carrossel-texto">
+        <span> SUA LOGOTIPO ESTA AQUI    SUA LOGOTIPO ESTA AQUI      SUA LOGOTIPO ESTA AQUI  </span>
+      </div>
+
+      <!-- Botão para acessar mockups -->
+      <button class="mockup-access-btn" onclick="goToMockups()">
+        Explorar Galeria de Mockups
+      </button>
+
+      <!-- Galeria + Cortina -->
+      <div class="galeria-container">
+        <!-- Galeria -->
+        <div class="galeria">
+          <img src="https://i.postimg.cc/qMDgkjGV/TA-FODA-1.png" alt="Logo TA FODA">
+          <img src="https://i.postimg.cc/d0r0jvcw/LAS-2025-1.png" alt="Logo LAS 2025">
+          <img src="https://i.postimg.cc/0242gr89/JAGUA-JOIAS-1.png" alt="Logo JAGUA JOIAS">
+          <img src="https://i.postimg.cc/0NRkQ3M3/ERA-PANDA-1.png" alt="Logo ERA PANDA">
+          <img src="https://i.postimg.cc/ZRwnT8tD/PLLAY-1.png" alt="Logo PLLAY">
+          <img src="https://i.postimg.cc/5y01TWTH/CHEF-O-1.png" alt="Logo CHEF O">
+          <img src="https://i.postimg.cc/5tSVttMY/CACETA-1.png" alt="Logo CACETA">
+          <img src="https://i.postimg.cc/Zn2kQB6g/BOUGE-SVART-1.png" alt="Logo BOUGE SVART">
+          <img src="https://i.postimg.cc/NMFzwGGw/BO-DE-1.png" alt="Logo BO DE">
+          <img src="https://i.postimg.cc/FRkwLFMV/7X-1.png" alt="Logo 7X">
+          <img src="https://i.postimg.cc/DyPHsMMH/ZEUS-MARINE-1.png" alt="Logo ZEUS MARINE">
+          <img src="https://i.postimg.cc/tJ7T7s9R/QUEM-FOI-1.png" alt="Logo QUEM FOI">
+          <img src="https://i.postimg.cc/GmPcLFvJ/TRES-VELAS-1.png" alt="Logo TRES VELAS">
+          <img src="https://i.postimg.cc/GmRgS7RC/IMOVEIS-CATAL-O-1.png" alt="Logo IMOVEIS CATALAO">
+          <img src="https://i.postimg.cc/rspdWhNk/INTRIGANTE-1.png" alt="Logo INTRIGANTE">
+        </div>
+
+        <!-- Cortina animada -->
+        <div class="curtain-wrapper" tabindex="0">
+          <div class="curtain">
+            <div class="grid-gifs">
+              <div class="gif-block"><img src="https://i.picasion.com/pic92/41ab8bf9ff5d8d1b063c1e838e8e0e1a.gif" alt="Animação 1"></div>
+              <div class="gif-block"><img src="https://i.postimg.cc/BvmvT00R/ADV-CONSTATINO.png" alt="Logo ADV CONSTATINO"></div>
+              <div class="gif-block"><img src="https://i.picasion.com/pic92/41f8e7e33a874dde5e7381ab04df5fe1.gif" alt="Animação 2"></div>
+              <div class="gif-block"><img src="https://i.picasion.com/pic92/54bc31cb01902476f57fbbe42a3913e4.gif" alt="Animação 3"></div>
+              <div class="gif-block"><img src="https://i.picasion.com/pic92/9a8a8a8da7c8b57a44f0f0c95d040404.gif" alt="Animação 4"></div>
+              <div class="gif-block"><img src="https://i.picasion.com/pic92/16cdc58a0014955f250a7c948d459b9d.gif" alt="Animação 5"></div>
+              <div class="gif-block"><img src="https://i.postimg.cc/2SVk5XNf/CHEFAO-1.png" alt="Logo CHEFAO"></div>
+              <div class="gif-block"><img src="https://i.picasion.com/pic92/52632bb4078806972047e73192fdea21.gif" alt="Animação 6"></div>
+              <div class="gif-block"><img src="https://i.picasion.com/pic92/8ef967f058e5ab5f000670e1fc49b804.gif" alt="Animação 7"></div>
+              <div class="gif-block"><img src="https://i.picasion.com/pic92/72e55163aca92beb301620d2e5a64d44.gif" alt="Animação 8"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Retângulos -->
+      <div class="retangulos">
+        <div class="retangulo"><img src="https://i.picasion.com/pic92/52afd344a1b7d1208dc2c5bc65b06f35.gif" alt="Banner animado 1"></div>
+        <div class="retangulo"><img src="https://i.postimg.cc/qqpkQr5G/cart-o-de-visita-branco.png" alt="Cartão de visita"></div>
+        <div class="retangulo"><img src="https://i.postimg.cc/Zqjbkwtz/camisa-de-griffe-alongada-branca-manga-curta.png" alt="Camisa de griffe"></div>
+      </div>
+
+      <footer>
+        <p>© 2025 - lapindesigner360</p>
+      </footer>
+    </div>
+
+    <!-- Página de Mockups -->
+    <div class="page mockup-page">
+      <button class="back-btn" onclick="goBack()">← Voltar</button>
+      
+      <div class="mockup-header">
+        <h2>Galeria de Mockups Profissionais</h2>
+        <p style="color: rgba(255,255,255,0.8); margin-bottom: 2rem;">Escolha o modelo perfeito para apresentar seus designs</p>
+      </div>
+
+      <div class="mockup-grid">
+        <div class="mockup-card" onclick="useMockup('poster')">
+          <div class="mockup-image">
+            <img src="https://i.postimg.cc/pL9PW4Hb/etiqueta-para-embalegem-d-e-lanche.png" alt="Mockup Poster">
+          </div>
+          <div class="mockup-info">
+            <div class="mockup-title">Mockup Poster Dinâmico</div>
+            <div class="mockup-description">Apresente seus designs em formato poster com animações profissionais</div>
+          </div>
+          <div class="mockup-overlay">Clique para usar</div>
+        </div>
+
+        <div class="mockup-card" onclick="useMockup('monitor')">
+          <div class="mockup-image">
+            <img src="https://i.picasion.com/pic92/41f8e7e33a874dde5e7381ab04df5fe1.gif" alt="Mockup Monitor">
+          </div>
+          <div class="mockup-info">
+            <div class="mockup-title">Mockup Monitor Animado</div>
+            <div class="mockup-description">Visualize seus designs em telas profissionais com efeitos dinâmicos</div>
+          </div>
+          <div class="mockup-overlay">Clique para usar</div>
+        </div>
+
+        <div class="mockup-card" onclick="useMockup('mobile')">
+          <div class="mockup-image">
+            <img src="https://i.picasion.com/pic92/54bc31cb01902476f57fbbe42a3913e4.gif" alt="Mockup Mobile">
+          </div>
+          <div class="mockup-info">
+            <div class="mockup-title">Mockup Mobile Interactive</div>
+            <div class="mockup-description">Apps e interfaces mobile em dispositivos realistas com animações</div>
+          </div>
+          <div class="mockup-overlay">Clique para usar</div>
+        </div>
+
+        <div class="mockup-card" onclick="useMockup('produto')">
+          <div class="mockup-image">
+            <img src="https://i.picasion.com/pic92/9a8a8a8da7c8b57a44f0f0c95d040404.gif" alt="Mockup Produto">
+          </div>
+          <div class="mockup-info">
+            <div class="mockup-title">Mockup Produto 3D</div>
+            <div class="mockup-description">Embalagens e produtos em cenários realistas com movimento</div>
+          </div>
+          <div class="mockup-overlay">Clique para usar</div>
+        </div>
+
+        <div class="mockup-card" onclick="useMockup('cartao')">
+          <div class="mockup-image">
+            <img src="https://i.picasion.com/pic92/16cdc58a0014955f250a7c948d459b9d.gif" alt="Mockup Cartão">
+          </div>
+          <div class="mockup-info">
+            <div class="mockup-title">Mockup Cartão Premium</div>
+            <div class="mockup-description">Cartões de visita e materiais gráficos com efeitos elegantes</div>
+          </div>
+          <div class="mockup-overlay">Clique para usar</div>
+        </div>
+
+        <div class="mockup-card" onclick="useMockup('branding')">
+          <div class="mockup-image">
+            <img src="https://i.picasion.com/pic92/52632bb4078806972047e73192fdea21.gif" alt="Mockup Branding">
+          </div>
+          <div class="mockup-info">
+            <div class="mockup-title">Mockup Branding Completo</div>
+            <div class="mockup-description">Identidades visuais completas e logotipos com apresentação dinâmica</div>
+          </div>
+          <div class="mockup-overlay">Clique para usar</div>
+        </div>
+
+        <div class="mockup-card" onclick="useMockup('social')">
+          <div class="mockup-image">
+            <img src="https://i.picasion.com/pic92/8ef967f058e5ab5f000670e1fc49b804.gif" alt="Mockup Social">
+          </div>
+          <div class="mockup-info">
+            <div class="mockup-title">Mockup Social Media</div>
+            <div class="mockup-description">Posts e conteúdos para redes sociais com animações modernas</div>
+          </div>
+          <div class="mockup-overlay">Clique para usar</div>
+        </div>
+
+        <div class="mockup-card" onclick="useMockup('ferramentas')">
+          <div class="mockup-image">
+            <img src="https://i.picasion.com/pic92/72e55163aca92beb301620d2e5a64d44.gif" alt="Mockup Ferramentas">
+          </div>
+          <div class="mockup-info">
+            <div class="mockup-title">Mockup Ferramentas Pro</div>
+            <div class="mockup-description">Apresentações criativas com ferramentas de design em movimento</div>
+          </div>
+          <div class="mockup-overlay">Clique para usar</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chat flutuante melhorado -->
+  <div class="chat-float">
+    <a href="https://www.facebook.com/messages/e2ee/t/3314178858740476/" target="_blank" class="chat">
+      Chat
+    </a>
+  </div>
+
+  <script>
+    function goToMockups() {
+      document.querySelector('.main-page').classList.remove('active');
+      document.querySelector('.mockup-page').classList.add('active');
+      
+      // Anima os cards de mockup
+      setTimeout(() => {
+        const cards = document.querySelectorAll('.mockup-card');
+        cards.forEach((card, index) => {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(30px)';
+          card.style.transition = 'all 0.6s ease';
+          
+          setTimeout(() => {
+            card.style
