@@ -139,24 +139,30 @@
       transform: scale(1.05);
     }
 
-    /* Botão para acessar mockups */
-    .mockup-access-btn {
-      background: rgba(2, 64, 89, 0.6);
+    /* Botão da nova galeria de mockups - estilo similar ao original */
+    .gallery-button {
+      padding: 15px 30px;
+      background-color: #024059;
       color: white;
-      border: none;
-      padding: 1rem 2rem;
-      font-size: 1.1rem;
-      border-radius: 0px;
-      cursor: pointer;
+      text-decoration: none;
+      font-size: 18px;
+      border-radius: 0;
+      opacity: 0.6;
       transition: all 0.3s ease;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+      text-align: center;
+      display: inline-block;
       margin: 30px 0;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
     }
-
-    .mockup-access-btn:hover {
-      background: rgba(2, 64, 89, 0.8);
+    
+    .gallery-button:hover {
+      opacity: 1;
       transform: translateY(-3px);
       box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+      color: white;
+      text-decoration: none;
     }
 
     /* Cortina sobre a galeria */
@@ -244,7 +250,7 @@
     }
     
     .chat {
-      background: linear-gradient(135deg, #024059, #026873);
+      background: linear-gradient(135deg, #4C4D54, #03A63C);
       color: white;
       padding: 15px 25px;
       border-radius: 50px;
@@ -285,23 +291,15 @@
       z-index: 10; 
     }
 
-    /* Estilos da página de mockups */
+    /* Estilos da página da nova galeria */
     .mockup-page {
       background: rgba(22, 31, 48, 0.8);
       padding: 2rem;
       min-height: 100vh;
-    }
-
-    .mockup-header {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-
-    .mockup-header h2 {
-      color: white;
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     .back-btn {
@@ -314,6 +312,9 @@
       transition: all 0.3s ease;
       font-size: 1rem;
       margin-bottom: 2rem;
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
     }
 
     .back-btn:hover {
@@ -322,121 +323,21 @@
       transform: translateY(-2px);
     }
 
-    .mockup-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2rem;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .mockup-card {
-      background: rgba(255,255,255,0.1);
-      border: 2px solid rgba(255,255,255,0.2);
-      border-radius: 12px;
-      padding: 1.5rem;
-      height: 400px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-    }
-
-    .mockup-card::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-      transform: rotate(45deg);
-      transition: all 0.6s ease;
-      opacity: 0;
-    }
-
-    .mockup-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(255,255,255,0.4);
-      background: rgba(255,255,255,0.15);
-    }
-
-    .mockup-card:hover::before {
-      opacity: 1;
-      transform: translateX(100%) rotate(45deg);
-    }
-
-    .mockup-image {
-      width: 100%;
-      height: 250px;
-      border-radius: 8px;
-      overflow: hidden;
-      margin-bottom: 1rem;
-      background: rgba(0,0,0,0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .mockup-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-
-    .mockup-card:hover .mockup-image img {
-      transform: scale(1.05);
-    }
-
-    .mockup-info {
+    .gallery-page-content {
       text-align: center;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      color: white;
     }
 
-    .mockup-title {
-      color: white;
+    .gallery-page-content h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .gallery-page-content p {
       font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-    }
-
-    .mockup-description {
-      color: rgba(255,255,255,0.8);
-      font-size: 0.9rem;
-      line-height: 1.4;
-    }
-
-    .mockup-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(45deg, rgba(102,126,234,0.8), rgba(118,75,162,0.8));
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1.1rem;
-      font-weight: bold;
-      border-radius: 12px;
-    }
-
-    .mockup-card:hover .mockup-overlay {
-      opacity: 1;
+      opacity: 0.8;
+      margin-bottom: 2rem;
     }
 
     /* Loading placeholder para GIFs */
@@ -480,19 +381,6 @@
         width: 150px;
         height: 180px;
       }
-      .mockup-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-      .mockup-header h2 {
-        font-size: 2rem;
-      }
-      .mockup-card {
-        height: 350px;
-      }
-      .mockup-image {
-        height: 200px;
-      }
       .retangulo {
         width: 250px;
         height: 400px;
@@ -500,6 +388,15 @@
       .chat {
         padding: 12px 20px;
         font-size: 14px;
+      }
+      .gallery-page-content h2 {
+        font-size: 2rem;
+      }
+      .back-btn {
+        position: relative;
+        top: 0;
+        left: 0;
+        margin-bottom: 2rem;
       }
     }
   </style>
@@ -541,10 +438,10 @@
         <span> SUA LOGOTIPO ESTA AQUI    SUA LOGOTIPO ESTA AQUI      SUA LOGOTIPO ESTA AQUI  </span>
       </div>
 
-      <!-- Botão para acessar mockups -->
-      <button class="mockup-access-btn" onclick="goToMockups()">
-        Explorar Galeria de Mockups
-      </button>
+      <!-- Botão para acessar a nova galeria de mockups -->
+      <a href="#" class="gallery-button" onclick="goToMockups()">
+        Access Mockup Gallery
+      </a>
 
       <!-- Galeria + Cortina -->
       <div class="galeria-container">
@@ -598,103 +495,14 @@
       </footer>
     </div>
 
-    <!-- Página de Mockups -->
+    <!-- Nova Página da Galeria de Mockups -->
     <div class="page mockup-page">
       <button class="back-btn" onclick="goBack()">← Voltar</button>
       
-      <div class="mockup-header">
-        <h2>Galeria de Mockups Profissionais</h2>
-        <p style="color: rgba(255,255,255,0.8); margin-bottom: 2rem;">Escolha o modelo perfeito para apresentar seus designs</p>
-      </div>
-
-      <div class="mockup-grid">
-        <div class="mockup-card" onclick="openMockup('poster')">
-          <div class="mockup-image">
-            <img src="https://i.postimg.cc/pL9PW4Hb/etiqueta-para-embalegem-d-e-lanche.png" alt="Mockup Poster">
-          </div>
-          <div class="mockup-info">
-            <div class="mockup-title">Mockup Poster Dinâmico</div>
-            <div class="mockup-description">Apresente seus designs em formato poster com animações profissionais</div>
-          </div>
-          <div class="mockup-overlay">Clique para usar</div>
-        </div>
-
-        <div class="mockup-card" onclick="openMockup('monitor')">
-          <div class="mockup-image">
-            <img src="https://i.picasion.com/pic92/41f8e7e33a874dde5e7381ab04df5fe1.gif" alt="Mockup Monitor">
-          </div>
-          <div class="mockup-info">
-            <div class="mockup-title">Mockup Monitor Animado</div>
-            <div class="mockup-description">Visualize seus designs em telas profissionais com efeitos dinâmicos</div>
-          </div>
-          <div class="mockup-overlay">Clique para usar</div>
-        </div>
-
-        <div class="mockup-card" onclick="openMockup('mobile')">
-          <div class="mockup-image">
-            <img src="https://i.picasion.com/pic92/54bc31cb01902476f57fbbe42a3913e4.gif" alt="Mockup Mobile">
-          </div>
-          <div class="mockup-info">
-            <div class="mockup-title">Mockup Mobile Interactive</div>
-            <div class="mockup-description">Apps e interfaces mobile em dispositivos realistas com animações</div>
-          </div>
-          <div class="mockup-overlay">Clique para usar</div>
-        </div>
-
-        <div class="mockup-card" onclick="openMockup('produto')">
-          <div class="mockup-image">
-            <img src="https://i.picasion.com/pic92/9a8a8a8da7c8b57a44f0f0c95d040404.gif" alt="Mockup Produto">
-          </div>
-          <div class="mockup-info">
-            <div class="mockup-title">Mockup Produto 3D</div>
-            <div class="mockup-description">Embalagens e produtos em cenários realistas com movimento</div>
-          </div>
-          <div class="mockup-overlay">Clique para usar</div>
-        </div>
-
-        <div class="mockup-card" onclick="openMockup('cartao')">
-          <div class="mockup-image">
-            <img src="https://i.picasion.com/pic92/16cdc58a0014955f250a7c948d459b9d.gif" alt="Mockup Cartão">
-          </div>
-          <div class="mockup-info">
-            <div class="mockup-title">Mockup Cartão Premium</div>
-            <div class="mockup-description">Cartões de visita e materiais gráficos com efeitos elegantes</div>
-          </div>
-          <div class="mockup-overlay">Clique para usar</div>
-        </div>
-
-        <div class="mockup-card" onclick="openMockup('branding')">
-          <div class="mockup-image">
-            <img src="https://i.picasion.com/pic92/52632bb4078806972047e73192fdea21.gif" alt="Mockup Branding">
-          </div>
-          <div class="mockup-info">
-            <div class="mockup-title">Mockup Branding Completo</div>
-            <div class="mockup-description">Identidades visuais completas e logotipos com apresentação dinâmica</div>
-          </div>
-          <div class="mockup-overlay">Clique para usar</div>
-        </div>
-
-        <div class="mockup-card" onclick="openMockup('social')">
-          <div class="mockup-image">
-            <img src="https://i.picasion.com/pic92/8ef967f058e5ab5f000670e1fc49b804.gif" alt="Mockup Social">
-          </div>
-          <div class="mockup-info">
-            <div class="mockup-title">Mockup Social Media</div>
-            <div class="mockup-description">Posts e conteúdos para redes sociais com animações modernas</div>
-          </div>
-          <div class="mockup-overlay">Clique para usar</div>
-        </div>
-
-        <div class="mockup-card" onclick="openMockup('ferramentas')">
-          <div class="mockup-image">
-            <img src="https://i.picasion.com/pic92/72e55163aca92beb301620d2e5a64d44.gif" alt="Mockup Ferramentas">
-          </div>
-          <div class="mockup-info">
-            <div class="mockup-title">Mockup Ferramentas Pro</div>
-            <div class="mockup-description">Apresentações criativas com ferramentas de design em movimento</div>
-          </div>
-          <div class="mockup-overlay">Clique para usar</div>
-        </div>
+      <div class="gallery-page-content">
+        <h2>Galeria de Mockups</h2>
+        <p>Sua nova galeria de mockups está aqui!</p>
+        <p>Este espaço pode ser customizado com seus mockups e designs.</p>
       </div>
     </div>
   </div>
@@ -711,13 +519,45 @@
       console.log('Indo para mockups...');
       document.querySelector('.main-page').classList.remove('active');
       document.querySelector('.mockup-page').classList.add('active');
-      
-      // Anima os cards de mockup
-      setTimeout(() => {
-        const cards = document.querySelectorAll('.mockup-card');
-        cards.forEach((card, index) => {
-          card.style.opacity = '0';
-          card.style.transform = 'translateY(30px)';
+    }
 
-          card.style.transition = 'all 0.
+    function goBack() {
+      console.log('Voltando para página principal...');
+      document.querySelector('.mockup-page').classList.remove('active');
+      document.querySelector('.main-page').classList.add('active');
+    }
 
+    function openMockup(type) {
+      console.log('Abrindo mockup:', type);
+      // Aqui você pode adicionar lógica específica para cada tipo de mockup
+      alert('Abrindo mockup: ' + type);
+    }
+
+    // Smooth scrolling para links internos
+    document.addEventListener('DOMContentLoaded', function() {
+      // Adiciona animação suave para os elementos que aparecem
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+
+      // Observa elementos da galeria
+      document.querySelectorAll('.galeria img').forEach(img => {
+        img.style.opacity = '0';
+        img.style.transform = 'translateY(20px)';
+        img.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(img);
+      });
+    });
+  </script>
+</body>
+</html>
