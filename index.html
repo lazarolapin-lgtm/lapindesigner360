@@ -5,507 +5,127 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LAPINDESIGNER360</title>
   <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+  <!-- Font Awesome corrigido -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Abel', sans-serif;
-      color: #fff;
-      overflow-x: hidden;
-    }
+    body { font-family: 'Abel', sans-serif; color: #fff; overflow-x: hidden; }
 
     /* Fundo dinâmico */
     .background-container {
-      position: fixed;
-      top: 0; left: 0;
+      position: fixed; top: 0; left: 0;
       width: 100%; height: 100%;
-      overflow: hidden;
-      z-index: -1;
+      overflow: hidden; z-index: -1;
     }
-    .background-container img,
-    .background-container video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .background-container img {
+      width: 100%; height: 100%; object-fit: cover;
     }
 
-    .content {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-    }
+    .content { position: relative; z-index: 1; text-align: center; }
 
     /* Páginas */
-    .page {
-      display: none;
-    }
-
-    .page.active {
-      display: block;
-      width: 100%;
-      min-height: 100vh;
-    }
+    .page { display: none; }
+    .page.active { display: block; width: 100%; min-height: 100vh; }
 
     /* Navbar */
     .navbar {
-      overflow: hidden;
-      background: rgba(30, 58, 95, 0.6);
-      display: flex;
-      justify-content: flex-end;
-      padding: 10px;
+      overflow: hidden; background: rgba(30, 58, 95, 0.6);
+      display: flex; justify-content: flex-end; padding: 10px;
     }
     .navbar a {
-      color: white;
-      padding: 15px 21px;
-      text-decoration: none;
+      color: white; padding: 15px 21px; text-decoration: none;
     }
-    .navbar a:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-    }
+    .navbar a:hover { background: rgba(255, 255, 255, 0.1); border-radius: 8px; }
 
     /* Logo centralizada */
     .logo-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      padding: 50px 20px;
+      display: flex; justify-content: center; align-items: center;
+      position: relative; padding: 50px 20px;
     }
-    .logo img {
-      max-width: 600px;
-      height: auto;
-    }
+    .logo img { max-width: 600px; height: auto; }
 
-    /* Carrinho fixo no canto */
+    /* Carrinho */
     .carrinho {
-      position: absolute;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
+      position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
     }
-    .carrinho img {
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-    }
+    .carrinho img { width: 40px; height: 40px; cursor: pointer; }
 
     /* Carrossel texto */
     .carrossel-texto {
-      white-space: nowrap;
-      overflow: hidden;
-      width: 100%;
-      margin: 20px 0;
+      white-space: nowrap; overflow: hidden; width: 100%; margin: 20px 0;
     }
     .carrossel-texto span {
-      display: inline-block;
-      padding-left: 100%;
+      display: inline-block; padding-left: 100%;
       animation: scroll 20s linear infinite;
-      font-size: 2rem;
-      font-weight: bold;
-      color:#F2F2F0;
+      font-size: 2rem; font-weight: bold; color:#F2F2F0;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
     }
-    @keyframes scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-100%); }
-    }
+    @keyframes scroll { 0% { transform: translateX(0);} 100% { transform: translateX(-100%);} }
 
-    /* Galeria + cortina */
+    /* Galeria */
     .galeria-container {
-      position: relative;
-      margin: 20px auto;
-      width: 95%;
-      display: flex;
-      justify-content: center;
+      position: relative; margin: 20px auto; width: 95%;
+      display: flex; justify-content: center;
     }
-
     .galeria {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 15px;
-      justify-items: center;
-      width: 100%;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 15px; justify-items: center; width: 100%;
     }
     .galeria img {
-      width: 300px;
-      height: 300px;
-      object-fit: cover;
-      border-radius: 0px;
-      transition: transform 0.3s ease;
+      width: 300px; height: 300px; object-fit: cover;
+      border-radius: 0; transition: transform 0.3s ease;
     }
-    
-    .galeria img:hover {
-      transform: scale(1.05);
-    }
+    .galeria img:hover { transform: scale(1.05); }
 
-    /* Botão da nova galeria de mockups - estilo similar ao original */
+    /* Botão galeria */
     .gallery-button {
-      padding: 15px 30px;
-      background-color: #024059;
-      color: white;
-      text-decoration: none;
-      font-size: 18px;
-      border-radius: 0;
-      opacity: 0.6;
-      transition: all 0.3s ease;
-      text-align: center;
-      display: inline-block;
-      margin: 30px 0;
-      border: none;
-      cursor: pointer;
+      padding: 15px 30px; background-color: #024059; color: white;
+      font-size: 18px; border-radius: 0; opacity: 0.6;
+      transition: all 0.3s ease; margin: 30px 0;
+      border: none; cursor: pointer;
       box-shadow: 0 8px 25px rgba(0,0,0,0.2);
     }
-    
     .gallery-button:hover {
-      opacity: 1;
-      transform: translateY(-3px);
+      opacity: 1; transform: translateY(-3px);
       box-shadow: 0 12px 35px rgba(0,0,0,0.3);
-      color: white;
-      text-decoration: none;
     }
 
-    /* Cortina sobre a galeria */
-    .curtain-wrapper {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 1300px;
-      height: 100%;
-      overflow: hidden;
-      outline: none;
-      cursor: pointer;
-      z-index: 5;
-      background: transparent;
-    }
+    /* Cortina */
+    .curtain-wrapper { position: absolute; top: 0; right: 0; width: 1300px; height: 100%; cursor: pointer; }
     .curtain {
-      position: absolute;
-      right: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
+      position: absolute; right: 0; top: 0; width: 100%; height: 100%;
       background: rgba(30, 58, 95, 0.8);
-      transform-origin: right center;
-      transform: scaleX(0);
+      transform-origin: right center; transform: scaleX(0);
       transition: transform 700ms cubic-bezier(.2,.8,.2,1);
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      display: flex; justify-content: center; align-items: center;
     }
-    .curtain-wrapper:hover .curtain {
-      transform: scaleX(1);
-    }
+    .curtain-wrapper:hover .curtain { transform: scaleX(1); }
+
     .grid-gifs {
-      display: grid;
-      grid-template-columns: repeat(5, 200px);
-      grid-template-rows: repeat(2, 250px);
-      gap: 20px;
+      display: grid; grid-template-columns: repeat(5, 200px);
+      grid-template-rows: repeat(2, 250px); gap: 20px;
     }
-    .gif-block {
-      width: 200px;
-      height: 250px;
-      background: #12121A;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      border-radius: 0px;
-    }
-    .gif-block img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    .gif-block { width: 200px; height: 250px; background: #12121A; display: flex; align-items: center; justify-content: center; }
+    .gif-block img { width: 100%; height: 100%; object-fit: cover; }
 
     /* Retângulos */
-    .retangulos { 
-      display: flex; 
-      gap: 70px; 
-      animation: mover 35s linear infinite;
-      margin: 50px 0;
-    }
-    .retangulo { 
-      width: 400px; 
-      height: 600px; 
-      background: rgba(255,255,255,0.05); 
-      overflow: hidden;
-      border-radius: 0px;
-    }
-    .retangulo img { 
-      width: 100%; 
-      height: 100%; 
-      object-fit: cover; 
-    }
-    @keyframes mover { 
-      0% { transform: translateX(-100%); } 
-      100% { transform: translateX(100%); } 
-    }
+    .retangulos { display: flex; gap: 70px; animation: mover 35s linear infinite; margin: 50px 0; }
+    .retangulo { width: 400px; height: 600px; background: rgba(255,255,255,0.05); border-radius: 0; }
+    .retangulo img { width: 100%; height: 100%; object-fit: cover; }
+    @keyframes mover { 0% { transform: translateX(-100%);} 100% { transform: translateX(100%);} }
 
-    /* Chat - Botão flutuante melhorado */
-    .chat-float {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      z-index: 1000;
-    }
-    
+    /* Chat */
+    .chat-float { position: fixed; bottom: 30px; right: 30px; z-index: 1000; }
     .chat {
       background: linear-gradient(135deg, #4C4D54, #03A63C);
-      color: white;
-      padding: 15px 25px;
-      border-radius: 50px;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      transition: all 0.3s ease;
+      color: white; padding: 15px 25px;
+      border-radius: 50px; cursor: pointer;
       box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      font-weight: bold;
-      font-size: 16px;
-      border: none;
+      font-weight: bold; font-size: 16px; border: none;
     }
-    
-    .chat:hover {
-      background: linear-gradient(135deg, #03A63C, #028A32);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-      color: white;
-      text-decoration: none;
-    }
-    
-    .chat::before {
-      content: "💬";
-      margin-right: 8px;
-    }
+    .chat:hover { background: linear-gradient(135deg, #03A63C, #028A32); }
 
-    footer { 
-      margin-top: 50px; 
-      padding: 20px; 
-      background: rgba(30, 58, 95, 0.8); 
-      text-align: center; 
-    }
-
-    .contador { 
-      position: absolute; 
-      top: 10px; 
-      right: 20px; 
-      z-index: 10; 
-    }
-
-    /* Estilos da página da nova galeria de mockups GIF */
-    .mockup-page {
-      background: rgba(22, 31, 48, 0.9);
-      padding: 2rem;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .back-btn {
-      background: rgba(255,255,255,0.1);
-      color: white;
-      border: 2px solid rgba(255,255,255,0.3);
-      padding: 0.8rem 2rem;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 1rem;
-      margin-bottom: 2rem;
-      position: absolute;
-      top: 2rem;
-      left: 2rem;
-    }
-
-    .back-btn:hover {
-      background: rgba(255,255,255,0.2);
-      border-color: rgba(255,255,255,0.5);
-      transform: translateY(-2px);
-    }
-
-    .gallery-page-content {
-      text-align: center;
-      color: white;
-      width: 100%;
-      max-width: 1400px;
-    }
-
-    .gallery-page-content h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-      color: #F2F2F0;
-    }
-
-    .gallery-page-content p {
-      font-size: 1.2rem;
-      opacity: 0.8;
-      margin-bottom: 2rem;
-    }
-
-    /* Galeria de GIFs da página de mockups */
-    .mockup-gif-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 25px;
-      width: 100%;
-      margin-top: 2rem;
-      padding: 0 2rem;
-    }
-
-    .mockup-gif-item {
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 0px;
-      overflow: hidden;
-      transition: all 0.4s ease;
-      border: 2px solid rgba(255, 255, 255, 0.1);
-      position: relative;
-    }
-
-    .mockup-gif-item:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-      border-color: rgba(255, 255, 255, 0.3);
-    }
-
-    .mockup-gif-item img {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-
-    .mockup-gif-item:hover img {
-      transform: scale(1.05);
-    }
-
-    .gif-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-      padding: 20px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .mockup-gif-item:hover .gif-overlay {
-      opacity: 1;
-    }
-
-    .gif-title {
-      color: white;
-      font-size: 1.1rem;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-
-    .gif-description {
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 0.9rem;
-    }
-
-    /* Categorias de filtro */
-    .filter-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin: 2rem 0;
-      flex-wrap: wrap;
-    }
-
-    .filter-btn {
-      background: rgba(255, 255, 255, 0.1);
-      color: white;
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      padding: 10px 20px;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 0.9rem;
-    }
-
-    .filter-btn:hover,
-    .filter-btn.active {
-      background: rgba(2, 64, 89, 0.8);
-      border-color: rgba(255, 255, 255, 0.4);
-      transform: translateY(-2px);
-    }
-
-    /* Loading placeholder para GIFs */
-    .gif-loading {
-      display: inline-block;
-      width: 40px;
-      height: 40px;
-      border: 3px solid rgba(255,255,255,0.3);
-      border-radius: 0%;
-      border-top-color: #fff;
-      animation: spin 1s ease-in-out infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    @media (max-width: 768px) {
-      .galeria-container { 
-        flex-direction: column; 
-        align-items: center; 
-      }
-      .galeria { 
-        width: 100%; 
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      }
-      .galeria img {
-        width: 100%;
-        height: 250px;
-      }
-      .curtain-wrapper { 
-        width: 100%; 
-        height: auto; 
-        position: relative;
-      }
-      .grid-gifs {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-      }
-      .gif-block {
-        width: 150px;
-        height: 180px;
-      }
-      .retangulo {
-        width: 250px;
-        height: 400px;
-      }
-      .chat {
-        padding: 12px 20px;
-        font-size: 14px;
-      }
-      .gallery-page-content h2 {
-        font-size: 2rem;
-      }
-      .back-btn {
-        position: relative;
-        top: 0;
-        left: 0;
-        margin-bottom: 2rem;
-      }
-      .mockup-gif-gallery {
-        grid-template-columns: 1fr;
-        padding: 0 1rem;
-      }
-      .mockup-gif-item img {
-        height: 250px;
-      }
-      .filter-buttons {
-        gap: 10px;
-        margin: 1rem 0;
-      }
-      .filter-btn {
-        padding: 8px 15px;
-        font-size: 0.8rem;
-      }
-    }
+    footer { margin-top: 50px; padding: 20px; background: rgba(30, 58, 95, 0.8); text-align: center; }
   </style>
 </head>
 <body>
@@ -517,19 +137,13 @@
   <div class="content">
     <!-- Página Principal -->
     <div class="page main-page active">
-      <!-- Navbar -->
       <div class="navbar">
         <a href="https://wa.me/5511958759477?text=seja%20bem%20vindo%20" target="_blank">Contatos</a>
         <a href="https://www.google.com" target="_blank">Sobre</a>
         <a href="https://i.postimg.cc/HnYcXZPN/pedido-termo-logotipo-logo.png" target="_blank">Termos</a>
       </div>
 
-      <!-- Logo central -->
-      <div class="logo-container glass">
-        <div class="contador">
-          <div id="sfck3353yqa4hw55ht3y5uxpunfq7g36sxn"></div>
-          <script type="text/javascript" src="https://counter5.optistats.ovh/private/counter.js?c=k3353yqa4hw55ht3y5uxpunfq7g36sxn&down=async" async></script>
-        </div>
+      <div class="logo-container">
         <div class="logo">
           <img src="https://i.postimg.cc/tRdqcYbN/untitled-0.png" alt="Logotipo da empresa">
         </div>
@@ -540,20 +154,17 @@
         </div>
       </div>
 
-      <!-- Carrossel de Texto -->
       <div class="carrossel-texto">
-        <span> SUA LOGOTIPO ESTA AQUI    SUA LOGOTIPO ESTA AQUI      SUA LOGOTIPO ESTA AQUI  </span>
+        <span>SUA LOGOTIPO ESTA AQUI SUA LOGOTIPO ESTA AQUI SUA LOGOTIPO ESTA AQUI</span>
       </div>
 
-      <!-- Botão para acessar a nova galeria de mockups -->
-      <a href="#" class="gallery-button" onclick="goToMockups()">
-        🎨 Galeria de Mockups GIF
-      </a>
+      <!-- Botão galeria -->
+      <a href="#" class="gallery-button" onclick="goToMockups()">🎨 Galeria de Mockups GIF</a>
 
-      <!-- Galeria + Cortina -->
+      <!-- Galeria + cortina -->
       <div class="galeria-container">
-        <!-- Galeria -->
         <div class="galeria">
+          <!-- seus logos -->
           <img src="https://i.postimg.cc/qMDgkjGV/TA-FODA-1.png" alt="Logo TA FODA">
           <img src="https://i.postimg.cc/d0r0jvcw/LAS-2025-1.png" alt="Logo LAS 2025">
           <img src="https://i.postimg.cc/0242gr89/JAGUA-JOIAS-1.png" alt="Logo JAGUA JOIAS">
@@ -571,7 +182,7 @@
           <img src="https://i.postimg.cc/rspdWhNk/INTRIGANTE-1.png" alt="Logo INTRIGANTE">
         </div>
 
-        <!-- Cortina animada -->
+        <!-- Cortina -->
         <div class="curtain-wrapper" tabindex="0">
           <div class="curtain">
             <div class="grid-gifs">
@@ -585,7 +196,7 @@
               <div class="gif-block"><img src="https://i.picasion.com/pic92/52632bb4078806972047e73192fdea21.gif" alt="Animação 6"></div>
               <div class="gif-block"><img src="https://i.picasion.com/pic92/8ef967f058e5ab5f000670e1fc49b804.gif" alt="Animação 7"></div>
               <div class="gif-block"><img src="https://i.picasion.com/pic92/72e55163aca92beb301620d2e5a64d44.gif" alt="Animação 8"></div>
-               <div class="gif-block"><img src="https://i.postimg.cc/pXF2kFN4/AURORA-1.png" alt="Animação 8"></div>
+              <div class="gif-block"><img src="https://i.postimg.cc/pXF2kFN4/AURORA-1.png" alt="Logo Aurora"></div>
             </div>
           </div>
         </div>
@@ -603,15 +214,12 @@
       </footer>
     </div>
 
-    <!-- Nova Página da Galeria de Mockups GIF -->
+    <!-- Página mockups -->
     <div class="page mockup-page">
       <button class="back-btn" onclick="goBack()">← Voltar</button>
-      
       <div class="gallery-page-content">
         <h2>🎨 Galeria de Mockups GIF</h2>
         <p>Explore nossa coleção exclusiva de mockups animados e designs em movimento</p>
-        
-        <!-- Filtros de categoria -->
         <div class="filter-buttons">
           <button class="filter-btn active" onclick="filterGifs('all')">Todos</button>
           <button class="filter-btn" onclick="filterGifs('logos')">Logos</button>
@@ -620,93 +228,40 @@
           <button class="filter-btn" onclick="filterGifs('branding')">Branding</button>
         </div>
 
-        <!-- Galeria de GIFs -->
         <div class="mockup-gif-gallery">
-          <div class="mockup-gif-item" data-category="animations">
-            <img src="https://i.postimg.cc/pXF2kFN4/AURORA-1.png" alt="Animação Logo 1">
-            <div class="gif-overlay">
-              <div class="gif-title">Logo Animado 1</div>
-              <div class="gif-description">Animação fluida para marca moderna</div>
-            </div>
-          </div>
-          
-          <div class="mockup-gif-item" data-category="animations">
-            <img src="https://i.picasion.com/pic92/41f8e7e33a874dde5e7381ab04df5fe1.gif" alt="Animação Logo 2">
-            <div class="gif-overlay">
-              <div class="gif-title">Logo Animado 2</div>
-              <div class="gif-description">Efeito de revelação elegante</div>
-            </div>
-          </div>
-          
-          <div class="mockup-gif-item" data-category="animations">
-            <img src="https://i.picasion.com/pic92/54bc31cb01902476f57fbbe42a3913e4.gif" alt="Animação Logo 3">
-            <div class="gif-overlay">
-              <div class="gif-title">Logo Animado 3</div>
-              <div class="gif-description">Transição dinâmica profissional</div>
-            </div>
-          </div>
-          
-          <div class="mockup-gif-item" data-category="mockups">
-            <img src="https://i.picasion.com/pic92/9a8a8a8da7c8b57a44f0f0c95d040404.gif" alt="Mockup Animado 1">
-            <div class="gif-overlay">
-              <div class="gif-title">Mockup Animado</div>
-              <div class="gif-description">Apresentação interativa de produto</div>
-            </div>
-          </div>
-          
-          <div class="mockup-gif-item" data-category="animations">
-            <img src="https://i.picasion.com/pic92/16cdc58a0014955f250a7c948d459b9d.gif" alt="Animação Logo 4">
-            <div class="gif-overlay">
-              <div class="gif-title">Logo Animado 4</div>
-              <div class="gif-description">Movimento suave e impactante</div>
-            </div>
-          </div>
-          
-          <div class="mockup-gif-item" data-category="branding">
-            <img src="https://i.picasion.com/pic92/52632bb4078806972047e73192fdea21.gif" alt="Branding Animado">
-            <div class="gif-overlay">
-              <div class="gif-title">Branding Animado</div>
-              <div class="gif-description">Identidade visual em movimento</div>
-            </div>
-          </div>
-          
-          <div class="mockup-gif-item" data-category="animations">
-            <img src="https://i.picasion.com/pic92/8ef967f058e5ab5f000670e1fc49b804.gif" alt="Animação Logo 5">
-            <div class="gif-overlay">
-              <div class="gif-title">Logo Animado 5</div>
-              <div class="gif-description">Efeito de fade cinematográfico</div>
-            </div>
-          </div>
-          
-          <div class="mockup-gif-item" data-category="animations">
-            <img src="https://i.picasion.com/pic92/72e55163aca92beb301620d2e5a64d44.gif" alt="Animação Logo 6">
-            <div class="gif-overlay">
-              <div class="gif-title">Logo Animado 6</div>
-              <div class="gif-description">Rotação 3D envolvente</div>
-            </div>
-          </div>
-          
-          <div class="mockup-gif-item" data-category="mockups">
-            <img src="https://i.picasion.com/pic92/52afd344a1b7d1208dc2c5bc65b06f35.gif" alt="Banner Animado">
-            <div class="gif-overlay">
-              <div class="gif-title">Banner Animado</div>
-              <div class="gif-description">Design promocional dinâmico</div>
-            </div>
-          </div>
-          
-          <!-- Adicionar mais GIFs estáticos como exemplos -->
-          <div class="mockup-gif-item" data-category="logos">
-            <img src="https://i.postimg.cc/BvmvT00R/ADV-CONSTATINO.png" alt="Logo ADV Constatino">
-            <div class="gif-overlay">
-              <div class="gif-title">ADV Constatino</div>
-              <div class="gif-description">Logo profissional advocacia</div>
-            </div>
-          </div>
-          
           <div class="mockup-gif-item" data-category="logos">
             <img src="https://i.postimg.cc/2SVk5XNf/CHEFAO-1.png" alt="Logo Chefão">
             <div class="gif-overlay">
               <div class="gif-title">Chefão</div>
+              <div class="gif-description">Identidade visual gastronômica</div>
+            </div>
+          </div>
+          <!-- pode adicionar mais blocos aqui -->
+        </div>
+      </div>
+    </div>
+  </div>
 
-              <div class="gif-description">Identidade visual gastronômica</div
-
+  <!-- Script -->
+  <script>
+    function goToMockups() {
+      document.querySelector('.main-page').classList.remove('active');
+      document.querySelector('.mockup-page').classList.add('active');
+    }
+    function goBack() {
+      document.querySelector('.mockup-page').classList.remove('active');
+      document.querySelector('.main-page').classList.add('active');
+    }
+    function filterGifs(category) {
+      const items = document.querySelectorAll('.mockup-gif-item');
+      items.forEach(item => {
+        if (category === 'all' || item.dataset.category === category) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
